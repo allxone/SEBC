@@ -47,6 +47,10 @@ This is the case because I ran msfs.ext4 with -m 0 option
 
 ## Check the user limits for maximum file descriptors and processes
 Checked <code>/etc/security/limits*, ulimit -Hn, ulimit -Sh</code> and it is the default. Not changed because Cloudera Manager will do it for me.
+Anyway I added the following linew to <code>/etc/security/limits.conf</code> to support my administrative user (cdhadmin)  
+<code>cdhadmin soft nofile 32768  
+cdhadmin hard nofile 65536  
+</code>
 
 ## Test forward and reverse host lookups for correct resolution
 >\# hostname -f | nslookup  
