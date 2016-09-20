@@ -20,9 +20,12 @@ Expand file system
 > \# resize2fs /dev/xvde1
 
 # Install missing packages
-> \# yum install bind-utils nscd ntp wget  
+> \# yum install bind-utils nscd ntp wget hdparm
 
 # Linux Configuration Checks
+## Docs
+http://www.slideshare.net/technmsg/improving-hadoop-performancevialinux
+
 ## Check vm.swappiness on all your nodes
 Edit file <code>/etc/sysctl.conf</code> adding line <code>vm.swappiness = 1</code>
 
@@ -32,12 +35,18 @@ Checked /etc/fstab and the only non-root disk is the extra-disk I mounted with n
 \# /sbin/mkfs.ext4 -m 0 -L disk1 /dev/xvdf  
 \# echo "LABEL=disk1      /data/disk1  ext4  defaults,noatime  0 0">>/etc/fstab  
 \# mount -a
+  
+Check disk performances  
+>\# hdparm -Tt /dev/xvdf
+> /dev/xvdf:  
+> Timing cached reads:   17362 MB in  1.98 seconds = 8766.89 MB/sec  
+> Timing buffered disk reads:  98 MB in  3.00 seconds =  32.65 MB/sec
 
 ## Check that the reserve space of any non-root volumes to 0
 This is the case because I ran msfs.ext4 with -m 0 option
 
 ## Check the user limits for maximum file descriptors and processes
-TODO
+Checked <code>/etc/security/limits*, ulimit -Hn, ulimit -Sh</code> and it is the default. Not changed because Cloudera Manager will do it for me.
 
 ## Test forward and reverse host lookups for correct resolution
 >\# hostname -f | nslookup  
@@ -47,6 +56,7 @@ TODO
 >\# chkconfig --list nsc
 \# chkconfig nscd on
 \# service nscd start
+\# nscd -g
 
 ## Verify/enable the ntpd service
 Changed ntp server to the following list in <code>/etc/ntp.conf</code>
