@@ -1,0 +1,5 @@
+# YARN/RM Lab: Doing the Math
+Subtracting the computed overhead from Excel sheet "Cluster Configuration" we end up with 16 physical cores and 109 GB of RAM available for YARN containers on each worker.
+In the example MapReduce mappers will run with 1core/1GB memory each and their global concurrency will be limited by the most scarce resource, that would be CPU cores in the inspected case: this means that mapper concurrency depends heavely on the CPU overcommit parameter value. An overcommit value of 4 with 12 spindle per node means 5,3 mapper per disk spindle, basically changing the prevalent disk IO pattern from sequential to random (considering also that each mapper when writes affects three spindles due to replication traffic). I would go with a more conservative CPU overcommit value between 1 and 2 resulting in a range between 160 and 320 for <code>mapreduce.job.maps</code>, minus one to account for the application master.
+
+Have a look at /resources/labs/0_YarnCalcs.xlsx to get the related math.
