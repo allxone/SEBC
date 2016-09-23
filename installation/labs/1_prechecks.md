@@ -57,10 +57,10 @@ cdhadmin hard nofile 65536
 \# /sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' | nslookup
 
 ## Verify/enable the nscd service
->\# chkconfig --list nsc
-\# chkconfig nscd on
-\# service nscd start
-\# nscd -g
+>\# chkconfig --list nsc  
+\# chkconfig nscd on  
+\# service nscd start  
+\# nscd -g  
 
 ## Verify/enable the ntpd service
 Changed ntp server to the following list in <code>/etc/ntp.conf</code>
