@@ -28,3 +28,36 @@ mysql> SHOW GRANTS FOR 'oozie'@'%';
 	| GRANT ALL PRIVILEGES ON `oozie`.* TO 'oozie'@'%'                                                     |
 	+------------------------------------------------------------------------------------------------------+
 	2 rows in set (0.00 sec)
+
+# User home dirs
+$ hdfs dfs -ls /user
+
+	Found 7 items
+	drwxr-xr-x   - christie christie          0 2016-09-23 14:14 /user/christie
+	drwxr-xr-x   - hdfs     hdfs              0 2016-09-23 14:13 /user/hdfs
+	drwxrwxrwx   - mapred   hadoop            0 2016-09-23 14:08 /user/history
+	drwxrwxr-t   - hive     hive              0 2016-09-23 14:09 /user/hive
+	drwxrwxr-x   - hue      hue               0 2016-09-23 14:10 /user/hue
+	drwxrwxr-x   - oozie    oozie             0 2016-09-23 14:10 /user/oozie
+	drwxr-xr-x   - weiner   weiner            0 2016-09-23 14:14 /user/weiner
+
+# Classpath
+$ hadoop classpath
+
+	/etc/hadoop/conf:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop/lib/*:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop/.//*:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop-hdfs/./:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop-hdfs/lib/*:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop-hdfs/.//*:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop-yarn/lib/*:/opt/cloudera/parcels/CDH-5.7.0-1.cdh5.7.0.p0.45/lib/hadoop/libexec/../../hadoop-yarn/.//*:/opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/lib/*:/opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/.//*
+
+
+# First item of /api/v13/hosts
+	{
+	    "hostId" : "i-088ed277c487629c8",
+	    "ipAddress" : "172.31.28.31",
+	    "hostname" : "ip-172-31-28-31.ec2.internal",
+	    "rackId" : "/default",
+	    "hostUrl" : "http://ip-172-31-28-32.ec2.internal:7180/cmf/hostRedirect/i-088ed277c487629c8",
+	    "maintenanceMode" : false,
+	    "maintenanceOwners" : [ ],
+	    "commissionState" : "COMMISSIONED",
+	    "numCores" : 4,
+	    "numPhysicalCores" : 4,
+	    "totalPhysMemBytes" : 15740297216
+	  }
